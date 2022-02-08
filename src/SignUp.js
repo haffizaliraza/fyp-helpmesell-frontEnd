@@ -112,20 +112,11 @@ function SignUp()
       const history=useHistory();
 
      async function Submit() {
-         if (contactNo.length < 11 && contactNo !== "+92")
-         {
-             alert("invalid phone number")
-         }
-         if(password.length<6)
-         {
-             alert("password is too small")
-         }
 
-         if( password === confirmPassword )
-         {  let item = {'FirstName': firstName, 'LastName' : lastName, 'Username' : username, 'Email' : email,
-             'ContactNo':contactNo, 'DateOfBirth':dob, 'Password':password, 'CPassword': confirmPassword};
+         let item = {'first_name': firstName, 'last_name' : lastName, 'username' : username, 'email' : email,
+             'contact_no':contactNo, 'dob':dob, 'password':password, 'confirm_password': confirmPassword};
+
          console.log(item)
-         history.push('/login')
          const requestOptions = {
              method: 'POST',
              headers: { 'Content-Type': 'application/json',
@@ -137,14 +128,19 @@ function SignUp()
              const response = await fetch('https://finalproject-helpmesell.herokuapp.com/users/', requestOptions);
              const data = await response.json();
              this.setState({ postId: data.id });
+             let auth = await response.json()
+             if( response.status === 200 || response.status===201 ){
+                 localStorage.setItem('token',JSON.stringify(data.token))
+                 history.push('/login')
+             }else{
+                 this.setState({
+                     error: data.error
+                 })
+             }
+
          }
          catch(error){
              console.log("error",error);
-         }
-       }
-         else if(password !== confirmPassword)
-         {
-             alert("Password is incorrect");
          }
      }
 

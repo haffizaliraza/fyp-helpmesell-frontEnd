@@ -109,23 +109,32 @@ function Login()
         { history.push("/homepage") }
     },[] )*/
     async function Submit() {
-        {
 
-            let item = {'Username': username, 'Password': password};
+
+            let item = {'username': username, 'password': password};
             console.log(item)
-            history.push('/homepage')
 
-            const requestOptions = {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(item),
-            };
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json',
+                "Accept":'application/json'},
+            body: JSON.stringify(item)
+            ,
+        };
+        try{
             const response = await fetch('https://finalproject-helpmesell.herokuapp.com/userslogin/', requestOptions);
             const data = await response.json();
-            this.setState({postId: data.id});
+            this.setState({ postId: data.id });
+            let auth = await response.json()
+            if( response.status === 200 )
+                history.push('/homepage')
+            else{
+            }
 
         }
-
+        catch(error){
+            console.log("error",error);
+        }
     }
     function AdminSubmit()
     {
