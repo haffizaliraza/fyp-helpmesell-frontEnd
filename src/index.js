@@ -11,6 +11,7 @@ import AdminMain from "./AdminMain";
 import MarketSurvey from "./MarketSurvey";
 import PriceComparison from "./PriceComparison";
 import DynamicPage from "./DynamicPages";
+import UploadFile from "./UploadFile"
 
 
 
@@ -43,8 +44,9 @@ ReactDOM.render(
           <Route path="/products/:id/" exact={true}>
               <DynamicPage />
           </Route>
-
-
+          <Route path="/uploadfile" exact={true}>
+              <UploadFile />
+          </Route>
 
       </Router>
   </React.StrictMode>,

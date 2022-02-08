@@ -177,6 +177,9 @@ function HomePage({children}) {
             sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
         </Box>
     );
+function Submit()
+{ history.push('/uploadfile/')
+}
 
 function passValues()
 {
@@ -346,6 +349,8 @@ function passValues()
 </Router>
 
             </Box>
+
+
             {/*<DynamicPage id={data.id}/>*/}
         </div>
     );
